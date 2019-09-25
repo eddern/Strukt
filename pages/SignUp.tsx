@@ -29,10 +29,12 @@ const SignUp = () => {
     return (
         <View style={styles.container}>
             <Text>Sign Up</Text>
-            { errorMessage.length &&
+            { errorMessage.length ?
                 <Text style={{ color: "red" }}>
                     {errorMessage}
                 </Text>
+                :
+                <></>
             }
             <TextInput
                 placeholder="Email"

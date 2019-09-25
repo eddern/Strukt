@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import Loading from './pages/Loading'
-import SignUp from './pages/SignUp'
+import { createAppContainer, createSwitchNavigator } from "react-navigation";
+import { createStackNavigator } from "react-navigation-stack";
 
-import TodoList from './components/TodoList'
+import LoadingScreen from "./pages/Loading";
+import LoginScreen from "./pages/Login";
+import MainScreen from "./pages/Main";
+import SignUpScreen from "./pages/SignUp";
 
-export default function App() {
-  return (
-      <SignUp></SignUp>
-  );
-}
+const AppStack = createStackNavigator(
+  {
+    Home: {
+      screen: MainScreen,
+    },
+  });
+const AuthStack = createStackNavigator(
+  {
+    Login: {
+      screen: LoginScreen,
+    },
+    SignUp: {
+      screen: SignUpScreen,
+    },
+  });
+
+const App = createAppContainer(
+  createSwitchNavigator(
+    {
+      App: AppStack,
+      Auth: AuthStack,
+      Loading: {
+        screen: LoadingScreen,
+      },
+    },
+    {
+      initialRouteName: "Loading",
+    }));
+
+export default App;

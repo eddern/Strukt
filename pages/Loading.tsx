@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import { firebase } from '@react-native-firebase/auth'
+
 
 const styles = StyleSheet.create({
     container: {
@@ -9,7 +11,14 @@ const styles = StyleSheet.create({
     },
 });
 
-const LoadingComponent = () => {
+const LoadingComponent = ({ navigation }) => {
+    console.log(navigation)
+    useEffect(() => {
+        firebase.auth().onAuthStateChanged(user => {
+            navigation.navigate(user ? 'Main' : 'SignUp')
+
+        })
+    })
     return (
         <View style={styles.container}>
             <Text>Loading</Text>
