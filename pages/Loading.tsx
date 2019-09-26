@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
+import auth from '@react-native-firebase/auth';
 
 const styles = StyleSheet.create({
     container: {
@@ -10,6 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const LoadingComponent = () => {
+    console.log(auth)
     return (
         <View style={styles.container}>
             <Text>Loading</Text>
