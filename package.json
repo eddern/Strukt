@@ -8,8 +8,6 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "@react-native-firebase/app": "^0.5.4",
-    "@react-native-firebase/auth": "^0.5.4",
     "expo": "^35.0.0",
     "react": "16.9.0",
     "react-dom": "16.8.3",
