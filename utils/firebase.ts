@@ -4,8 +4,5 @@ import config from "./firebaseConfig";
 // Initialize firebase app
 firebase.initializeApp(config);
 
-// Start analytics
-firebase.analytics();
-
 // This is the firebase object used by the application
 export default firebase;
