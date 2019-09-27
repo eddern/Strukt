@@ -11,3 +11,5 @@ npm-debug.*
 web-build/
 web-report/
 node_modules
+
+firebaseConfig.ts
