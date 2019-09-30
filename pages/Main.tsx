@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+import firebase from "../utils/firebase";
 
 const styles = StyleSheet.create({
     container: {
@@ -10,9 +11,7 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-    const [currentUser, setCurrentUser] = useState({
-        email: "",
-    });
+    const [currentUser, setCurrentUser] = useState(firebase.auth().currentUser);
 
     return (
         <View style={styles.container}>

@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 
+import firebase from "../utils/firebase";
+import { NavigationScreenProp, NavigationState } from "react-navigation";
+
 const styles = StyleSheet.create({
     container: {
         alignItems: "center",
@@ -16,14 +19,18 @@ const styles = StyleSheet.create({
     },
 });
 
-const Login = () => {
+const Login = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
     const handleLogin = () => {
-        // TODO: Firebase stuff...
-        console.log("handleLogin");
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .catch((err) => setErrorMessage(err.message));
+    };
+
+    const toSignUp = () => {
+        navigation.navigate("SignUp");
     };
 
     return (
@@ -55,7 +62,7 @@ const Login = () => {
             <Button title="Login" onPress={handleLogin} />
             <Button
             title="Don't have an account? Sign Up"
-            onPress={() => console.log("navigate to SignUp")}
+            onPress={toSignUp}
             />
         </View>
     );
