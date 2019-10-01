@@ -1,5 +1,9 @@
 import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
+
+import TodoList from "../components/TodoList";
+import NewTodo from '../components/NewTodo';
+
 import firebase from "../utils/firebase";
 
 const styles = StyleSheet.create({
@@ -18,6 +22,8 @@ const Main = () => {
             <Text>
                 Hi {currentUser && currentUser.email}!
             </Text>
+            <TodoList />
+            <NewTodo></NewTodo>
         </View>
 
     );
