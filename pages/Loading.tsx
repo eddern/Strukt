@@ -1,21 +1,21 @@
-import React, { useEffect } from "react";
-import { ActivityIndicator, StyleSheet, Text, View } from "react-native";
-import { NavigationScreenProp, NavigationState } from "react-navigation";
+import React, { useEffect } from 'react';
+import { ActivityIndicator, StyleSheet, Text, View } from 'react-native';
+import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
-import firebase from "../utils/firebase";
+import firebase from '../utils/firebase';
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
+        alignItems: 'center',
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
 });
 
 const LoadingComponent = ({ navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
     useEffect(() => {
         firebase.auth().onIdTokenChanged( (user) => {
-            user ? navigation.navigate("Home") : navigation.navigate("SignUp");
+            user ? navigation.navigate('Home') : navigation.navigate('SignUp');
         });
     }, []);
 

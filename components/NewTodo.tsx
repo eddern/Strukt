@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { View, Modal, Text, Alert, TouchableHighlight } from 'react-native';
 
-
 const NewTodo = () => {
     const [modalVisible, setModalVisible] = useState(false);
 

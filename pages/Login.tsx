@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import React, { useState } from 'react';
+import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 
-import firebase from "../utils/firebase";
-import { NavigationScreenProp, NavigationState } from "react-navigation";
+import firebase from '../utils/firebase';
+import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
 const styles = StyleSheet.create({
     container: {
-        alignItems: "center",
+        alignItems: 'center',
         flex: 1,
-        justifyContent: "center",
+        justifyContent: 'center',
     },
     textInput: {
-        borderColor: "gray",
+        borderColor: 'gray',
         borderWidth: 1,
         height: 40,
         marginTop: 8,
-        width: "90%",
+        width: '90%',
     },
 });
 
 const Login = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleLogin = () => {
         firebase.auth().signInWithEmailAndPassword(email, password)
@@ -30,7 +30,7 @@ const Login = ({navigation }: { navigation: NavigationScreenProp<NavigationState
     };
 
     const toSignUp = () => {
-        navigation.navigate("SignUp");
+        navigation.navigate('SignUp');
     };
 
     return (
@@ -38,7 +38,7 @@ const Login = ({navigation }: { navigation: NavigationScreenProp<NavigationState
             <Text>Login</Text>
             {
                 errorMessage.length ?
-                <Text style={{ color: "red" }}>
+                <Text style={{ color: 'red' }}>
                     {errorMessage}
                 </Text>
                 :
