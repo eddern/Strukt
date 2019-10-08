@@ -11,7 +11,7 @@ const NewTodo = () => {
                 transparent={false}
                 visible={modalVisible}
                 onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
+                Alert.alert('Modal has been closed.');  
                 }}>
                 <View style={{marginTop: 22}}>
                 <View>
