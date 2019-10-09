@@ -1,4 +1,6 @@
+import React from 'react'
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { Root } from 'native-base'
 import { createStackNavigator } from 'react-navigation-stack';
 
 import LoadingScreen from './pages/Loading';
@@ -12,13 +14,13 @@ const AppStack = createStackNavigator(
       screen: MainScreen,
     },
   });
-const AuthStack = createStackNavigator(
+const AuthStack = createSwitchNavigator(
   {
-    Login: {
-      screen: LoginScreen,
-    },
     SignUp: {
       screen: SignUpScreen,
+    },
+    Login: {
+      screen: LoginScreen,
     },
   });
 
@@ -35,4 +37,7 @@ const App = createAppContainer(
       initialRouteName: 'Loading',
     }));
 
-export default App;
+export default () =>
+  <Root>
+    <App />
+  </Root>
