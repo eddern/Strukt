@@ -33,8 +33,10 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
         if (errorMessage) {
             Toast.show({
                 text: errorMessage,
+                type: 'danger',
                 buttonText: 'Okay',
-                duration: 3000,
+                duration: 5000,
+                onClose: () => setErrorMessage(''),
             })
         }
     }, [errorMessage]);
