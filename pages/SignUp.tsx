@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Content, Form, Item, Input, Label, Text, Toast } from 'native-base';
+import { Button, Container, Content, Form, Item, Input, Label, Text, Toast, View, Icon } from 'native-base';
 import { StyleSheet } from 'react-native'
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
 
@@ -7,11 +7,19 @@ import firebase from '../utils/firebase';
 import CustomHeader from '../components/Header'
 
 const styles = StyleSheet.create({
+    buttonWrapper: {
+        width: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        flexDirection: 'row',
+    },
     button: {
-        width: '20%',
-        left: 120,
+        width: 130,
+        marginTop: 10,
+        padding: 20,
     },
 })
+
 const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -22,6 +30,10 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
         if (password2 === password) {
             firebase.auth()
                 .createUserWithEmailAndPassword(email, password)
+                .then(resp => {
+                    //TODO: Handle setUser in application
+                    console.log("Response:", resp)
+                })
                 .catch( (err) => setErrorMessage(err.message))
         } else {
             setErrorMessage('Passwords does not match');
@@ -83,13 +95,14 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
                             />
                     </Item>
                 </Form>
-                <Button
-                    block
-                    style={{marginTop: 5, marginBottom: 5}}
-                    onPress={handleSignUp}
-                    >
-                        <Text> Sign up </Text>
-                </Button>
+                <View style={styles.buttonWrapper}>
+                    <Button
+                        style={styles.button}
+                        onPress={handleSignUp}
+                        >
+                            <Text> Sign up </Text>
+                    </Button>
+                </View>
                 <Button
                     full
                     transparent
