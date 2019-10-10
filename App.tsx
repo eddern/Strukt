@@ -3,15 +3,19 @@ import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { Root } from 'native-base'
 import { createStackNavigator } from 'react-navigation-stack';
 
-import LoadingScreen from './pages/Loading';
-import LoginScreen from './pages/Login';
-import MainScreen from './pages/Main';
-import SignUpScreen from './pages/SignUp';
+import LoadingScreen from './pages/auth/Loading';
+import LoginScreen from './pages/auth/Login';
+import TodoScreen from './pages/app/Todo';
+import ShoppingScreen from './pages/app/Shopping';
+import SignUpScreen from './pages/auth/SignUp';
 
 const AppStack = createStackNavigator(
   {
-    Home: {
-      screen: MainScreen,
+    Todo: {
+      screen: TodoScreen,
+    },
+    Shopping: {
+      screen: ShoppingScreen,
     },
   });
 const AuthStack = createSwitchNavigator(

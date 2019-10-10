@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Container, Content, Form, Item, Input, Label, Text, Toast, View, Icon } from 'native-base';
-import { StyleSheet } from 'react-native'
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
+import { Container, Content, Form, Item, Label, Input, Button, Text, Toast, View, Icon } from 'native-base';
 
-import firebase from '../utils/firebase';
-import CustomHeader from '../components/Header'
+import CustomHeader from '../../components/Header'
+import firebase from '../../utils/firebase';
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     buttonWrapper: {
@@ -14,31 +14,35 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     button: {
-        width: 130,
+        width: 135,
         marginTop: 10,
-        padding: 20,
+        padding: 10,
     },
 })
 
-const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
+const Login = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [password2, setPassword2] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSignUp = () => {
-        if (password2 === password) {
-            firebase.auth()
-                .createUserWithEmailAndPassword(email, password)
-                .then(resp => {
-                    //TODO: Handle setUser in application
-                    console.log("Response:", resp)
-                })
-                .catch( (err) => setErrorMessage(err.message))
-        } else {
-            setErrorMessage('Passwords does not match');
-
-        }
+    const handleLogin = () => {
+        firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(resp => {
+                // TODO: handle storing of user info
+                console.log("Response:", resp)
+            })
+            .catch((err) => {
+                switch (err.code) {
+                    case 'auth/invalid-email':
+                        setErrorMessage('Invalid email.')
+                    case 'auth/user-not-found':
+                        setErrorMessage('Could not find any user with that email.')
+                    case 'auth/wrong-password':
+                        setErrorMessage('Wrong password.')
+                    default:
+                        setErrorMessage(err.message)
+                }
+            });
     };
 
     useEffect(() => {
@@ -53,13 +57,13 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
         }
     }, [errorMessage]);
 
-    const toLogin = () => {
-        navigation.navigate('Login');
+    const toSignUp = () => {
+        navigation.navigate('SignUp');
     };
 
     return (
         <Container>
-            <CustomHeader pageTitle="Sign Up"/>
+            <CustomHeader pageTitle="Log in"/>
             <Content>
                 <Form>
                     <Item fixedLabel>
@@ -77,43 +81,34 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
                     <Item fixedLabel>
                         <Label>Password:</Label>
                         <Input
-                            placeholder="new password"
-                            textContentType="newPassword"
+                            placeholder="password"
+                            textContentType="password"
                             secureTextEntry
                             value={password}
                             onChangeText={setPassword}
                             />
                     </Item>
-                    <Item fixedLabel>
-                        <Label>Confirm:</Label>
-                        <Input
-                            placeholder="new password"
-                            textContentType="newPassword"
-                            secureTextEntry
-                            value={password2}
-                            onChangeText={setPassword2}
-                            />
-                    </Item>
                 </Form>
                 <View style={styles.buttonWrapper}>
                     <Button
+                        iconLeft
                         style={styles.button}
-                        onPress={handleSignUp}
+                        onPress={handleLogin}
                         >
-                            <Text> Sign up </Text>
+                            <Icon name="log-in"/>
+                            <Text> Log in </Text>
                     </Button>
                 </View>
                 <Button
                     full
                     transparent
-                    onPress={toLogin}
+                    onPress={toSignUp}
                     >
-                    <Text> Already signed up? Log in instead </Text>
+                    <Text> Not signed up yet? Register an account </Text>
                 </Button>
             </Content>
         </Container>
     );
-
 };
 
-export default SignUp;
+export default Login;

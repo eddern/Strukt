@@ -4,7 +4,7 @@ import { NavigationScreenProp, NavigationState } from 'react-navigation';
 import * as Font from 'expo-font';
 import { Ionicons } from '@expo/vector-icons';
 
-import firebase from './../utils/firebase';
+import firebase from './../../utils/firebase';
 
 const LoadingComponent = ({ navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
     const [fontReady, setFontReady] = useState(false)
@@ -12,8 +12,8 @@ const LoadingComponent = ({ navigation }: { navigation: NavigationScreenProp<Nav
     // Initialize fonts
     const loadFont = async () => {
         await Font.loadAsync({
-            Roboto: require('./../assets/fonts/Roboto-Regular.ttf'),
-            Roboto_medium: require('./../assets/fonts/Roboto-Medium.ttf'),
+            Roboto: require('./../../assets/fonts/Roboto-Regular.ttf'),
+            Roboto_medium: require('./../../assets/fonts/Roboto-Medium.ttf'),
             ...Ionicons.font,
         });
         setFontReady(true);
