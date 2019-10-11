@@ -9,7 +9,7 @@ import TodoScreen from './pages/app/Todo';
 import ShoppingScreen from './pages/app/Shopping';
 import SignUpScreen from './pages/auth/SignUp';
 
-const AppStack = createStackNavigator(
+const AppStack = createSwitchNavigator(
   {
     Todo: {
       screen: TodoScreen,

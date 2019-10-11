@@ -28,7 +28,7 @@ const LoadingComponent = ({ navigation }: { navigation: NavigationScreenProp<Nav
     useEffect(() => {
         if (fontReady) {
             firebase.auth().onIdTokenChanged( (user) => {
-                user ? navigation.navigate('Home') : navigation.navigate('Login');
+                user ? navigation.navigate('Todo') : navigation.navigate('Login');
             })
         }
     })

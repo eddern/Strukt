@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { NavigationScreenProp, NavigationState } from 'react-navigation';
-import { Container, Content, Input, Label, Item } from 'native-base';
+import { Container, Content, Input, Label, Item, Button, Text } from 'native-base';
 
 import firebase from '../../utils/firebase';
 import CustomHeader from '../../components/Header';
 import CustomFooter from '../../components/Footer';
+import NewItem from '../../components/NewItem';
 
 const TodoScreen = ({navigation }: { navigation: NavigationScreenProp<NavigationState>}) => {
 
@@ -12,11 +13,7 @@ const TodoScreen = ({navigation }: { navigation: NavigationScreenProp<Navigation
         <Container>
             <CustomHeader pageTitle="Todo"/>
             <Content>
-                <Item>
-                    <Label>Eddern</Label>
-                    <Input placeholder="new todo">
-                    </Input>
-                </Item>
+                <NewItem listName="Todo" />
             </Content>
             <CustomFooter />
         </Container>
