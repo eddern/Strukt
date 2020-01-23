@@ -1,0 +1,76 @@
+openapi: 3.0.0
+info:
+  version: '1.0.0'
+  title: 'Strukt API'
+  description: 'API for my Strukt project'
+  contact:
+    name: Edvard Schreiner Sjøblom
+    url: https://eddern.no
+    email: edd@eddern.no
+  license:
+    name: MIT License
+    url: https://www.mit.edu/~amini/LICENSE.md
+paths:
+  /users:
+    get:
+      description: Get list of all users
+      responses:
+        200:
+          description: Successful pull of users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+    post:
+      description: Create new user
+      responses:
+        201:
+          description: Successfully created new user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+                  
+  /users/{id}:
+    delete:
+      description: Delete the user with the specified id
+    put:
+      description: Edit the user with the specified id
+  /users/{id}/lists:
+    get:
+      description: Get all lists for user
+      parameters:
+        - in: path
+          name: id
+          required: true
+          description: the ID of the user
+          schema:
+            type: integer
+            example: 32
+servers:
+  - description: Prod Server
+    url: https://dev.foo.bar/prod/v1
+
+components:
+  schemas:
+    Users:
+      description: Array of users
+      type: array
+      items:
+        $ref: '#/components/schemas/User'
+
+    User:
+      description: Model containing user info
+      properties:
+        id:
+          type: integer
+          example: 4
+        nickname:
+          type: string
+          example: userOfc
+        email:
+          type: string
+          example: name@domain.TLD
+        phonenumber:
+          type: string
+          example: 97783830
