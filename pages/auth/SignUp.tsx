@@ -30,9 +30,9 @@ const SignUp = ({navigation }: { navigation: NavigationScreenProp<NavigationStat
         if (password2 === password) {
             firebase.auth()
                 .createUserWithEmailAndPassword(email, password)
-                .then(resp => {
-                    //TODO: Handle setUser in application
-                    console.log("Response:", resp)
+                .then((resp) => {
+                    // TODO: Handle setUser in application
+                    console.log('Response:', resp)
                 })
                 .catch( (err) => setErrorMessage(err.message))
         } else {
